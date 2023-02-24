@@ -26,5 +26,6 @@
         "shm.h": "c",
         "stat.h": "c",
         "iosfwd": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

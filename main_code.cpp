@@ -68,3 +68,42 @@ int main()
     Point vec[4] = rectangulate_polygon(v);
     return 0;
 }
+
+bool is_inside_polygon(vector<Vertex *> L, Vertex *point)
+{
+    int n = L.size();
+    bool inside = false;
+    float x = point->pos.x;
+    float y = point->pos.y;
+    float p1x = L[0]->pos.x;
+    float p1y = L[0]->pos.y;
+
+    for (int i = 1; i <= n; i++)
+    {
+        float p2x = L[i % n]->pos.x;
+        float p2y = L[i % n]->pos.y;
+
+        if (y >= min(p1y, p2y))
+        {
+            if (y <= max(p1y, p2y))
+            {
+                if (x <= max(p1x, p2x))
+                {
+                    if (p1y != p2y)
+                    {
+                        float xinters = (y - p1y) * (p2x - p1x) / (p2y - p1y) + p1x;
+                        if (p1x == p2x || x < xinters) // Changed this line
+                        {
+                            cout << p1x << " " << p1y << "  " << p2x << " " << p2y << endl;
+                            inside = !inside;
+                            cout << "I is now: " << i << " " << xinters << endl;
+                        }
+                    }
+                }
+            }
+        }
+        p1x = p2x;
+        p1y = p2y;
+    }
+    return inside;
+}

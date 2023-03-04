@@ -64,5 +64,9 @@ public:
     //     prevEdge2->org = vertexList.front();
     // }
     void make_dcel(vector<vec2> &points);
+    void addHalfEdges(int i, int j);
+    void addHalfEdges(Vertex *v1, Vertex *v2);
+    void removeHalfEdges(int index);
+    void removeHalfEdges(Edge *edge);
 };
 #endif

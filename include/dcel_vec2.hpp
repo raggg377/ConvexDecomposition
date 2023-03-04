@@ -5,8 +5,8 @@ using namespace std;
 class vec2
 {
 public:
-    float x; ///< X co-ordinate of the vertex
-    float y; ///< Y co-ordinate of the vertex
+    double x; ///< X co-ordinate of the vertex
+    double y; ///< Y co-ordinate of the vertex
 
     vec2()
     {
@@ -19,7 +19,7 @@ public:
      * @param x X co-ordinate of the vertex
      * @param y Y co-ordinate of the vertex
      */
-    vec2(float x, float y)
+    vec2(double x, double y)
     {
         this->x = x;
         this->y = y;

@@ -89,7 +89,7 @@ void dcel::addEdges(Vertex *v1, Vertex *v2)
     // auto prev1 = getPreviousEdge(v1, referenceDoubleEdgeListFace);
     // auto prev2 = getPreviousEdge(v2, referenceDoubleEdgeListFace);
 
-    auto prev1 = v1->inc_edge;
+    // auto prev1 = v1->inc_edge;
 
     // face->edge = left;
     // referenceDoubleEdgeListFace->edge = right;
@@ -184,6 +184,8 @@ void dcel::removeHalfEdges(Edge *edge)
 
     ePrev->next = tNext;
     tPrev->next = eNext;
+    eNext->prev = ePrev;
+    eNext->prev = tPrev;
 
     face->edge = eNext;
 

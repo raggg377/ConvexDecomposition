@@ -1,5 +1,6 @@
 #ifndef DCEL_VEC2_HPP
 #define DCEL_VEC2_HPP
+using namespace std;
 
 class vec2
 {

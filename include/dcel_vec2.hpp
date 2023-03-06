@@ -23,7 +23,12 @@ public:
     {
         this->x = x;
         this->y = y;
-    };
+    }
+
+    bool operator==(const vec2 &other) const
+    {
+        return (x == other.x) && (y == other.y);
+    }
 };
 
 #endif

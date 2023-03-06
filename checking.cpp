@@ -13,25 +13,11 @@ dcel concave;
 vector<dcel> decomp;
 vector<vec2> concave_polygon;
 int vertex_counter = 0;
-bool is_obtuse(Vertex *v1, Vertex *v2, Vertex *v3)
+bool is_notch(Vertex *v1, Vertex *v2, Vertex *v3)
 {
     double dot_product = (v3->pos.x - v1->pos.x) * (v2->pos.y - v1->pos.y) - (v3->pos.y - v1->pos.y) * (v2->pos.x - v1->pos.x);
     return dot_product < 0;
 }
-// bool is_obtuse(Vertex *p1, Vertex *p2, Vertex *p3)
-// {
-//     // find the length of each side
-//     double ux = p2->pos.x - p1->pos.x;
-//     double uy = p2->pos.y - p1->pos.y;
-//     double vx = p3->pos.x - p2->pos.x;
-//     double vy = p3->pos.y - p2->pos.y;
-//     double dotProduct = ux * vx + uy * vy;
-//     double magProduct = sqrt(ux * ux + uy * uy) * sqrt(vx * vx + vy * vy);
-//     // check if the angle at b is obtuse
-//     double angle = acos(dotProduct / magProduct);
-//     cout << "angle: " << angle << endl;
-//     return (angle > M_PI);
-// }
 
 bool is_inside_rectangle(vector<Vertex *> v, Vertex *ver)
 {
@@ -78,7 +64,7 @@ vector<Vertex *> getLPVS(vector<Vertex *> L)
     for (int i = 0; i < concave.vertexList.size(); i++)
     {
         auto _t = find(L.begin(), L.end(), concave.vertexList[i]);
-        if (_t == L.end() && is_obtuse(concave.vertexList[i]->inc_edge->prev->org, concave.vertexList[i], concave.vertexList[i]->inc_edge->next->org))
+        if (_t == L.end() && is_notch(concave.vertexList[i]->inc_edge->prev->org, concave.vertexList[i], concave.vertexList[i]->inc_edge->next->org))
         {
             LPVS.push_back(concave.vertexList[i]);
         }
@@ -142,7 +128,7 @@ void Decompose()
     int m = 1, i;
     int n = concave.vertexList.size();
     int ctr = 16;
-    while (n > 3)
+    while (n > 3 and ctr--)
     {
         v.resize(n + 1);
         cout << "inside while loop, n is: " << n << endl;
@@ -155,14 +141,17 @@ void Decompose()
         L.push_back(v[2]);
         i = 2;
         v[i + 1] = v[i]->inc_edge->next->org;
-        while (is_obtuse(v[i - 1], v[i], v[i + 1]) && is_obtuse(v[i], v[i + 1], v[1]) && is_obtuse(v[i + 1], v[1], v[2]) && L.size() < n)
+        while (!(is_notch(v[i - 1], v[i], v[i + 1]) or is_notch(v[i], v[i + 1], v[1]) or is_notch(v[i + 1], v[1], v[2])) && L.size() < n)
         {
-            cout << "Notch Found" << endl;
             auto _t = find(L.begin(), L.end(), v[i + 1]);
             if (_t == L.end())
                 L.push_back(v[++i]);
             v[i + 1] = v[i]->inc_edge->next->org;
         }
+        cout << "Notch Found" << endl;
+        cout << v[i - 1]->pos.x << " " << v[i - 1]->pos.y << endl;
+        cout << v[i]->pos.x << " " << v[i]->pos.y << endl;
+        cout << v[i + 1]->pos.x << " " << v[i + 1]->pos.y << endl;
         if (L.size() == concave.vertexList.size())
         {
             vector<Vertex *> LPVS = getLPVS(L);
@@ -269,9 +258,9 @@ int main()
     l.push_back(v5);
     // cout << is_inside_polygon(l, v) << endl;
     // not a notch
-    cout << "not a notch " << is_obtuse(v1, v2, v3) << endl;
+    cout << "not a notch " << is_notch(v1, v2, v3) << endl;
     // notch
-    cout << "is a notch " << is_obtuse(v6, v4, v5) << endl;
+    cout << "is a notch " << is_notch(v6, v4, v5) << endl;
     // cout << isInsideConvexPolygon(l, v) << endl;
     Decompose();
     // cout<< decomp.size() << endl;

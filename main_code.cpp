@@ -107,3 +107,57 @@ bool is_inside_polygon(vector<Vertex *> L, Vertex *point)
     }
     return inside;
 }
+
+// Get the incident vertices and faces of e
+Vertex *v1 = e->origin;
+Vertex *v2 = e->twin->origin;
+Face *f1 = e->face;
+Face *f2 = e->twin->face;
+
+// Get the neighboring edges of e
+Edge *e1 = e->next;
+Edge *e2 = e->twin->next;
+Edge *e3 = e1->next;
+Edge *e4 = e2->next;
+
+// Update the pointers of the incident vertices
+v1->incidentEdge = e3;
+v2->incidentEdge = e4;
+
+// Update the pointers of the neighboring edges
+e1->prev = e4;
+e3->next = e4;
+e2->prev = e3;
+e4->next = e3;
+delete e;
+
+// Assume you have a DCEL represented by a vector of vertices, edges, and faces
+// Each edge has two half-edges: a directed edge in each direction
+
+// Find the two half-edges associated with the edge to be removed
+HalfEdge *he1 = edge->he1;
+HalfEdge *he2 = edge->he2;
+
+// Update the twin pointers of the neighboring half-edges
+he1->twin->twin = nullptr;
+he2->twin->twin = nullptr;
+
+// Remove the half-edges and the edge from their respective lists
+auto it1 = std::find(edges.begin(), edges.end(), edge);
+if (it1 != edges.end())
+    edges.erase(it1);
+auto it2 = std::find(half_edges.begin(), half_edges.end(), he1);
+if (it2 != half_edges.end())
+    half_edges.erase(it2);
+auto it3 = std::find(half_edges.begin(), half_edges.end(), he2);
+if (it3 != half_edges.end())
+    half_edges.erase(it3);
+
+// Update the incident face of the remaining half-edge
+he1->face->edge = he1->next;
+
+// Update the incident face of the deleted half-edge's vertices
+he2->origin->edge = he1->next;
+
+// Delete the edge and free its memory
+delete edge;

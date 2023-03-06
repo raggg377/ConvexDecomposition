@@ -12,7 +12,7 @@ def generate_polygon(coords):
 
 # Example usage
 result = []
-with open('inp.txt', 'r') as f:
+with open('input.txt', 'r') as f:
     for line in f:
         result.extend(literal_eval(line.strip()))
 

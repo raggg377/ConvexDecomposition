@@ -4,6 +4,8 @@
 
 void dcel::make_dcel(vector<vec2> &points)
 {
+    vertexList.clear();
+    edgeList.clear();
     int n = points.size();
 
     Edge *prevEdge1 = nullptr;
@@ -64,6 +66,14 @@ void dcel::make_dcel(vector<vec2> &points)
             edge = edge->next->twin;
         }
         edgeList[j]->prev = edge;
+    }
+}
+
+void dcel::print_dcel()
+{
+    for (int i = 0; i < vertexList.size(); i++)
+    {
+        cout << " vertex " << i << " : " << vertexList[i]->pos.x << " -> " << vertexList[i]->pos.y << endl;
     }
 }
 

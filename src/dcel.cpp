@@ -184,8 +184,8 @@ void dcel::removeHalfEdges(Edge *edge)
 
     ePrev->next = tNext;
     tPrev->next = eNext;
-    eNext->prev = ePrev;
     eNext->prev = tPrev;
+    tNext->prev = tPrev;
 
     face->edge = eNext;
 

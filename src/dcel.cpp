@@ -76,7 +76,16 @@ void dcel::print_dcel()
         cout << " vertex " << i << " : " << vertexList[i]->pos.x << " -> " << vertexList[i]->pos.y << endl;
     }
 }
-
+void dcel::print_dcel_edges()
+{
+    for (int i = 0; i < edgeList.size(); i++)
+    {
+        cout << "incident vertex " << i << " : " << edgeList[i]->org->pos.x << " -> " <<  edgeList[i]->org->pos.y << endl;
+        cout << " vertex needed " << i << " : " << vertexList[i]->inc_edge->next->org->pos.x << " -> " << vertexList[i]->inc_edge->next->org->pos.y << endl;
+        cout << "prevedge" << i << " : " << edgeList[i]->prev->org->pos.x << " -> " <<  edgeList[i]->prev->org->pos.y << endl;
+        cout<< "nextedge" << i << " : " << edgeList[i]->next->org->pos.x << " -> " <<  edgeList[i]->next->org->pos.y << endl;
+    }
+}
 // void dcel::addEdges(int i, int j)
 // {
 //     auto iter_i = next(vertexList.begin(), i);

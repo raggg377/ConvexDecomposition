@@ -213,6 +213,7 @@ void Decompose()
                 _temp.push_back(L[i]->pos);
             }
             d.make_dcel(_temp);
+            //concave = d;
             cout << "make dcel " << endl;
             d.print_dcel();
             decomp.push_back(d);
@@ -235,7 +236,11 @@ void Decompose()
             //     _temp.push_back(concave.vertexList[i]->pos);
             // }
             concave.make_dcel(concave_polygon);
+            cout<<"intermediate vertices: "<<endl;
             concave.print_dcel();
+
+            cout<<"intermediate edges: "<<endl;
+            concave.print_dcel_edges();
             cout << "are we decrementing n?" << n << endl;
             n = n - L.size() + 2;
             cout << "n after decrement: " << n << endl;
@@ -265,6 +270,11 @@ int main()
         ss >> ch; // Ignore the comma separator
     }
     concave.make_dcel(concave_polygon);
+    cout<<"Initial vertices: "<<endl;
+    concave.print_dcel();
+
+    cout<<"intial edges: "<<endl;
+    concave.print_dcel_edges();
     vec2 v1p = vec2(0, 0);
     vec2 v11 = vec2(1, 3);
     vec2 v12 = vec2(1, 4);
@@ -293,7 +303,7 @@ int main()
     // notch
     cout << "is a notch " << is_notch(v6, v4, v5) << endl;
     // cout << isInsideConvexPolygon(l, v) << endl;
-    Decompose();
+    //Decompose();
 
     cout << "End of file are we here?" << endl;
     // cout<< decomp.size() << endl;

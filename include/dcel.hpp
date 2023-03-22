@@ -69,5 +69,6 @@ public:
     void removeHalfEdges(int index);
     void removeHalfEdges(Edge *edge);
     void print_dcel();
+    void print_dcel_edges();
 };
 #endif

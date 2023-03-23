@@ -151,10 +151,10 @@ void Decompose()
     while (n > 3)
     {
         v.resize(n + 1);
-        cout << "inside while loop, n is: " << n << " and m is: " << m << endl;
-        // cout << "size of L is: " << L.size() << endl;
-        // cout << "checking L.back just before v1" << endl;
-        // cout << L.back()->pos.x << " " << L.back()->pos.y << endl;
+        // cout << "inside while loop, n is: " << n << " and m is: " << m << endl;
+        //  cout << "size of L is: " << L.size() << endl;
+        //  cout << "checking L.back just before v1" << endl;
+        //  cout << L.back()->pos.x << " " << L.back()->pos.y << endl;
         v[1] = L.back();
         // cout << "printing incident edge of v1" << endl;
         // cout << v[1]->inc_edge->org->pos.x << " " << v[1]->pos.y << endl;
@@ -248,9 +248,9 @@ void Decompose()
         // cout << L[0]->pos.x << " " << L[0]->pos.y << endl;
         if (L.back() != v[2])
         {
-            cout << "we are now here in " << m << "th iteration" << endl;
-            //  dcel d;
-            cout << "decomposed: " << endl;
+            // cout << "we are now here in " << m << "th iteration" << endl;
+            //   dcel d;
+            // cout << "decomposed: " << endl;
             vector<vec2> _temp;
             for (int i = 0; i < L.size(); i++)
             {
@@ -587,35 +587,8 @@ void Merge()
                 // Write NPth polygon
                 cout << "This value should be 7: " << LUP[u] << endl;
                 mergePolygons(LUP[j], LUP[u], vs, vt);
-<<<<<<< HEAD
                 LDP.resize(np + 1, true);
 
-=======
-                // LDP.resize(np);
-                // LUP.resize(u);
-                // LDP[j] = false;
-                // // LDP[u] = false;
-                // if (u >= LDP.size())
-                //     LDP.push_back(false);
-                // else
-                //     LDP[u] = false;
-                // // LDP[np] = true;
-                // if (np >= LDP.size())
-                //     LDP.push_back(true);
-                // else
-                //     LDP[np] = true;
-                // // LDP.push_back(true);
-                // LUP[j] = np;
-                // if (u >= LUP.size())
-                //     LUP.push_back(np);
-                // else
-                //     LUP[u] = np;
-                // LUP.push_back(np);
-                LDP.resize(np);
-                // LUP.resize(u);
-                cout << "LUP size: " << LUP.size() << " LDP size: " << LDP.size() << endl;
-                cout << "u: " << u << " np: " << np << endl;
->>>>>>> 866d38b2f6404bdef8125ec01c64eefea73e22a7
                 LDP[j] = false;
                 LDP[u] = false;
                 LDP[np] = true;
@@ -634,7 +607,6 @@ void Merge()
                 {
                     if (LUP[h] == j || LUP[h] == u)
                     {
-<<<<<<< HEAD
                         if (h >= LUP.size())
                         {
                             for (int i = LUP.size(); i < h + 1; i++)
@@ -642,9 +614,6 @@ void Merge()
                                 LUP.push_back(i);
                             }
                         }
-=======
-                        cout << "h: " << h << endl;
->>>>>>> 866d38b2f6404bdef8125ec01c64eefea73e22a7
                         LUP[h] = np;
                     }
                 }
@@ -712,24 +681,24 @@ int main()
     //     cout << diagList[i].v1->pos.x << " " << diagList[i].v1->pos.y << " | ";
     //     cout << diagList[i].v2->pos.x << " " << diagList[i].v2->pos.y << endl;
     // }
-    // Merge();
-    // ofstream mergeFile("merged.txt");
-    // if (!mergeFile.is_open())
-    // {
-    //     cerr << "Error: merge.txt not Found." << endl;
-    //     exit(0);
-    // }
-    // for (int i = 0; i < decomp.size(); i++)
-    // {
-    //     if (LDP[i])
-    //     {
-    //         for (int j = 0; j < decomp[i].vertexList.size(); j++)
-    //         {
-    //             mergeFile << "(" << decomp[i].vertexList[j]->pos.x << ", " << decomp[i].vertexList[j]->pos.y << "), ";
-    //         }
-    //         mergeFile << endl;
-    //     }
-    // }
+    Merge();
+    ofstream mergeFile("merged.txt");
+    if (!mergeFile.is_open())
+    {
+        cerr << "Error: merge.txt not Found." << endl;
+        exit(0);
+    }
+    for (int i = 0; i < decomp.size(); i++)
+    {
+        if (LDP[i])
+        {
+            for (int j = 0; j < decomp[i].vertexList.size(); j++)
+            {
+                mergeFile << "(" << decomp[i].vertexList[j]->pos.x << ", " << decomp[i].vertexList[j]->pos.y << "), ";
+            }
+            mergeFile << endl;
+        }
+    }
     // cout << "Vertex is: " << merge_concave.vertexList[4]->pos.x << " " << merge_concave.vertexList[4]->pos.y << endl;
     // vector<lpv *> LPVs = make_LPV(merge_concave.vertexList[4]);
 

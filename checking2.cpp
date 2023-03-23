@@ -587,8 +587,35 @@ void Merge()
                 // Write NPth polygon
                 cout << "This value should be 7: " << LUP[u] << endl;
                 mergePolygons(LUP[j], LUP[u], vs, vt);
+<<<<<<< HEAD
                 LDP.resize(np + 1, true);
 
+=======
+                // LDP.resize(np);
+                // LUP.resize(u);
+                // LDP[j] = false;
+                // // LDP[u] = false;
+                // if (u >= LDP.size())
+                //     LDP.push_back(false);
+                // else
+                //     LDP[u] = false;
+                // // LDP[np] = true;
+                // if (np >= LDP.size())
+                //     LDP.push_back(true);
+                // else
+                //     LDP[np] = true;
+                // // LDP.push_back(true);
+                // LUP[j] = np;
+                // if (u >= LUP.size())
+                //     LUP.push_back(np);
+                // else
+                //     LUP[u] = np;
+                // LUP.push_back(np);
+                LDP.resize(np);
+                // LUP.resize(u);
+                cout << "LUP size: " << LUP.size() << " LDP size: " << LDP.size() << endl;
+                cout << "u: " << u << " np: " << np << endl;
+>>>>>>> 866d38b2f6404bdef8125ec01c64eefea73e22a7
                 LDP[j] = false;
                 LDP[u] = false;
                 LDP[np] = true;
@@ -607,6 +634,7 @@ void Merge()
                 {
                     if (LUP[h] == j || LUP[h] == u)
                     {
+<<<<<<< HEAD
                         if (h >= LUP.size())
                         {
                             for (int i = LUP.size(); i < h + 1; i++)
@@ -614,6 +642,9 @@ void Merge()
                                 LUP.push_back(i);
                             }
                         }
+=======
+                        cout << "h: " << h << endl;
+>>>>>>> 866d38b2f6404bdef8125ec01c64eefea73e22a7
                         LUP[h] = np;
                     }
                 }

@@ -23,7 +23,7 @@ void dcel::make_dcel(vector<vec2> &points)
     int n = points.size();
     Edge *prevEdge1 = nullptr;
     Edge *prevEdge2 = nullptr;
-    cout << "n = " << n << endl;
+    // cout << "n = " << n << endl;
     for (int i = 0; i < n; i++)
     {
 
@@ -40,10 +40,10 @@ void dcel::make_dcel(vector<vec2> &points)
         he2->next = prevEdge2;
         he2->org = nullptr;
         he2->twin = he1;
-        cout << "i =" << i << endl;
+        // cout << "i =" << i << endl;
 
         edgeList.push_back(he1);
-        cout << "i =" << i << endl;
+        // cout << "i =" << i << endl;
 
         edgeList.push_back(he2);
 
@@ -63,7 +63,7 @@ void dcel::make_dcel(vector<vec2> &points)
         prevEdge1 = he1;
         prevEdge2 = he2;
     }
-    cout << "exiting for" << endl;
+    // cout << "exiting for" << endl;
     Edge *firstLeftEdge = edgeList.front();
     prevEdge1->next = firstLeftEdge;
 

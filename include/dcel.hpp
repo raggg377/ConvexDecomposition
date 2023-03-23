@@ -68,6 +68,7 @@ public:
     void addHalfEdges(Vertex *v1, Vertex *v2);
     void removeHalfEdges(int index);
     void removeHalfEdges(Edge *edge);
+    void removeVertex(Vertex *v);
     void print_dcel();
     void print_dcel_edges();
 };

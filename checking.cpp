@@ -10,6 +10,7 @@
 using namespace std;
 
 dcel concave;
+int dcnt = 0;
 vector<dcel> decomp;
 vector<vec2> concave_polygon;
 int vertex_counter = 0;
@@ -21,38 +22,26 @@ bool is_notch(Vertex *v1, Vertex *v2, Vertex *v3)
 
 bool is_inside_rectangle(vector<Vertex *> v, Vertex *ver)
 {
-    // Vertex *extremes[4];
-    //  vector<Vertex *> extremes;
-    //  extremes[0]=point with minimum x
-    //  extremes[1]=point with max x
-    //  extremes[2]= point with min y
-    //  extremes[3]=point with max y
     int max_x = INT_MIN, min_x = INT_MAX, max_y = INT_MIN, min_y = INT_MAX;
-
     for (int i = 0; i < v.size(); i++)
     {
         if (v[i]->pos.x > max_x)
         {
             max_x = v[i]->pos.x;
-            // extremes[1] = v[i];
         }
         if (v[i]->pos.y > max_y)
         {
             max_y = v[i]->pos.y;
-            // extremes[3] = v[i];
         }
         if (v[i]->pos.x < min_x)
         {
             min_x = v[i]->pos.x;
-            // extremes[0] = v[i];
         }
         if (v[i]->pos.y < min_y)
         {
             min_y = v[i]->pos.y;
-            // extremes[2] = v[i];
         }
     }
-    // cout << min_x << " " << max_x << " " << min_y << " " << max_y << endl;
     if (min_x < ver->pos.x && max_x > ver->pos.x && min_y < ver->pos.y && max_y > ver->pos.y)
         return true;
     return false;
@@ -121,9 +110,7 @@ vector<Vertex *> getVerticesVTR(vector<Vertex *> L, Vertex *v1, Vertex *vo)
 
 void Decompose()
 {
-
     vector<Vertex *> L, v;
-
     L.push_back(concave.vertexList[0]);
     int m = 1, i;
     int n = concave.vertexList.size();
@@ -131,46 +118,24 @@ void Decompose()
     while (n > 3 and ctr--)
     {
         v.resize(n + 1);
-        cout << "inside while loop, n is: " << n << " and m is: " << m << endl;
         v[1] = L.back();
         v[2] = v[1]->inc_edge->next->org;
-        cout << "v1 and v2 are: " << endl;
-        cout << v[1]->pos.x << " " << v[1]->pos.y << endl;
-        cout << v[2]->pos.x << " " << v[2]->pos.y << endl;
         L.clear();
         L.push_back(v[1]);
         L.push_back(v[2]);
         i = 2;
         v[i + 1] = v[i]->inc_edge->next->org;
-        cout << "rest of the contents of Lm: " << endl;
         while (!(is_notch(v[i - 1], v[i], v[i + 1]) or is_notch(v[i], v[i + 1], v[1]) or is_notch(v[i + 1], v[1], v[2])) && L.size() < n)
         {
             auto _t = find(L.begin(), L.end(), v[i + 1]);
             if (_t == L.end())
                 L.push_back(v[++i]);
+            // cout << v[i]->pos.x << " " << v[i]->pos.y << endl;
             v[i + 1] = v[i]->inc_edge->next->org;
-            cout << v[i + 1]->pos.x << " " << v[i + 1]->pos.y << endl;
         }
-        cout << "Notch Found" << endl;
-        // for (int num = 0; num < i; num++)
-        // {
-        //     // cout << v[i - 1]->pos.x << " " << v[i - 1]->pos.y << endl;
-        //     cout << L[num]->pos.x << " " << L[num]->pos.y << endl;
-        //     // cout << v[i + 1]->pos.x << " " << v[i + 1]->pos.y << endl;
-        // }
-
-        cout << "size of L is: " << L.size() << endl;
         if (L.size() != concave.vertexList.size())
         {
             vector<Vertex *> LPVS = getLPVS(L);
-            // cout << "printing LPVS" << endl;
-
-            // for (int num = 0; num < LPVS.size(); num++)
-            // {
-            //     // cout << v[i - 1]->pos.x << " " << v[i - 1]->pos.y << endl;
-            //     cout << LPVS[num]->pos.x << " " << LPVS[num]->pos.y << endl;
-            //     // cout << v[i + 1]->pos.x << " " << v[i + 1]->pos.y << endl;
-            // }
             while (LPVS.size() > 0)
             {
                 // make rectangle
@@ -181,8 +146,8 @@ void Decompose()
                     Vertex *vo = LPVS[0];
                     do
                     {
-                        cout << vo->pos.x << " " << vo->pos.y << endl;
                         vo = LPVS[0];
+                        // cout << vo->pos.x << " " << vo->pos.y << endl;
                         if (!is_inside_rectangle(L, vo))
                         {
                             LPVS.erase(LPVS.begin() + 0);
@@ -191,7 +156,7 @@ void Decompose()
                     } while (!(is_inside_rectangle(L, vo) || LPVS.size() == 0));
                     if (LPVS.size())
                     {
-                        cout << m << " are we getting here?" << endl;
+                        // cout << m << " are we getting here?" << endl;
                         if (is_inside_polygon(L, vo))
                         {
                             L = getVerticesVTR(L, v[1], vo);
@@ -205,45 +170,19 @@ void Decompose()
         }
         if (L.back() != v[2])
         {
-            cout << "we are now here in " << m << "th iteration" << endl;
-            dcel d;
             vector<vec2> _temp;
             for (int i = 0; i < L.size(); i++)
             {
                 _temp.push_back(L[i]->pos);
             }
-            d.make_dcel(_temp);
-            //concave = d;
-            cout << "make dcel " << endl;
-            d.print_dcel();
-            decomp.push_back(d);
-            cout << "size of decomp is: " << endl;
-            for (int i = 1; i < _temp.size() - 1; i++)
+            for (int i = 1; i < L.size() - 1; i++)
             {
-                // cout << L[i]->pos.x << " " << L[i]->pos.y << endl;
-                cout << "inside for" << endl;
-                cout << "i is now: " << i << endl;
-                auto index = find(concave_polygon.begin(), concave_polygon.end(), _temp[i]) - concave_polygon.begin();
-                cout << concave_polygon[index].x << " " << concave_polygon[index].y << " " << index << endl;
-                concave_polygon.erase(concave_polygon.begin() + index);
+                auto index = find(concave.vertexList.begin(), concave.vertexList.end(), L[i]) - concave.vertexList.begin();
+                concave.removeVertex(concave.vertexList[index]);
             }
-            // concave_polygon.push_back(_temp[0]);
-            // concave_polygon.push_back(_temp[L.size() - 1]);
-            cout << "why arent we reaching here?" << endl;
-            // _temp.clear();
-            // for (int i = 0; i < concave.vertexList.size(); i++)
-            // {
-            //     _temp.push_back(concave.vertexList[i]->pos);
-            // }
-            concave.make_dcel(concave_polygon);
-            cout<<"intermediate vertices: "<<endl;
-            concave.print_dcel();
-
-            cout<<"intermediate edges: "<<endl;
-            concave.print_dcel_edges();
-            cout << "are we decrementing n?" << n << endl;
+            decomp[dcnt++].make_dcel(_temp);
+            // decomp[dcnt - 1].print_dcel();
             n = n - L.size() + 2;
-            cout << "n after decrement: " << n << endl;
         }
         m = m + 1;
     }
@@ -261,20 +200,22 @@ int main()
     char line[1000];
     inputFile.getline(line, 1000);
     char ch;
-    float x, y;
+    double x, y;
     stringstream ss(line);
     while (ss >> ch >> x >> ch >> ws >> y >> ch)
     {
+        cout << x << " " << y << endl;
         vec2 point = vec2(x, y);
         concave_polygon.push_back(point);
         ss >> ch; // Ignore the comma separator
     }
     concave.make_dcel(concave_polygon);
-    cout<<"Initial vertices: "<<endl;
+    decomp.resize(concave_polygon.size() / 3);
+    cout << "Initial vertices: " << endl;
     concave.print_dcel();
 
-    cout<<"intial edges: "<<endl;
-    concave.print_dcel_edges();
+    // cout << "intial edges: " << endl;
+    // concave.print_dcel_edges();
     vec2 v1p = vec2(0, 0);
     vec2 v11 = vec2(1, 3);
     vec2 v12 = vec2(1, 4);
@@ -297,14 +238,20 @@ int main()
     l.push_back(v6);
     l.push_back(v4);
     l.push_back(v5);
-    // cout << is_inside_polygon(l, v) << endl;
-    // not a notch
-    cout << "not a notch " << is_notch(v1, v2, v3) << endl;
-    // notch
-    cout << "is a notch " << is_notch(v6, v4, v5) << endl;
-    // cout << isInsideConvexPolygon(l, v) << endl;
-    //Decompose();
-
-    cout << "End of file are we here?" << endl;
-    // cout<< decomp.size() << endl;
+    Decompose();
+    ofstream decompFile("decomp2.txt");
+    if (!decompFile.is_open())
+    {
+        cerr << "Error: decomp.txt not Found." << endl;
+        exit(0);
+    }
+    cout << "decomp size: " << decomp.size() << endl;
+    for (int i = 0; i < decomp.size(); i++)
+    {
+        for (int j = 0; j < decomp[i].vertexList.size(); j++)
+        {
+            decompFile << "(" << decomp[i].vertexList[j]->pos.x << ", " << decomp[i].vertexList[j]->pos.y << "), ";
+        }
+        decompFile << endl;
+    }
 }

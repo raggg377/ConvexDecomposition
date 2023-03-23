@@ -1,0 +1,127 @@
+start of for j is now: 0
+vt 19 624
+vs 969 127
+Printing LPVs for 969 127
+0 ver: 19 624
+3 ver: 19 624
+Exiting LPVS
+Printing LPVs for 19 624
+0 ver: 969 127
+1 ver: 650 600
+3 ver: 450 520
+3 ver: 969 127
+5 ver: 650 600
+5 ver: 450 520
+Exiting LPVS
+Are we reaching here?
+j2 19 624
+i2 969 127
+i1 19 624
+j3 969 127
+u: 3
+i3 19 624
+j1 969 127
+Reaching in if
+This value should be 7: 3
+Merging indices: 0 3
+Merged polygon is: 
+ vertex 0 : 969, 127
+ vertex of inc edge0 : 301 -> 280
+ vertex 1 : 301, 280
+ vertex of inc edge1 : 19 -> 624
+ vertex 2 : 19, 624
+ vertex of inc edge2 : 450 -> 520
+ vertex 3 : 450, 520
+ vertex of inc edge3 : 969 -> 127
+LUP size: 6 LDP size: 6
+u: 3 np: 7
+LUP size: 6 np: 7
+start of for j is now: 1
+vt 650 600
+vs 19 624
+False for i 0
+False for i 3
+False for i 6
+Printing LPVs for 19 624
+1 ver: 650 600
+5 ver: 650 600
+5 ver: 450 520
+Exiting LPVS
+False for i 0
+False for i 3
+False for i 6
+Printing LPVs for 650 600
+1 ver: 19 624
+2 ver: 898 654
+4 ver: 898 654
+4 ver: 450 520
+5 ver: 450 520
+5 ver: 19 624
+Exiting LPVS
+Are we reaching here?
+j2 650 600
+i2 19 624
+i1 650 600
+j3 19 624
+u: 5
+i3 650 600
+j1 19 624
+Reaching in if
+This value should be 7: 5
+Merging indices: 1 5
+Merged polygon is: 
+ vertex 0 : 19, 624
+ vertex of inc edge0 : 500 -> 700
+ vertex 1 : 500, 700
+ vertex of inc edge1 : 650 -> 600
+ vertex 2 : 650, 600
+ vertex of inc edge2 : 450 -> 520
+ vertex 3 : 450, 520
+ vertex of inc edge3 : 19 -> 624
+LUP size: 6 LDP size: 6
+u: 5 np: 8
+LUP size: 6 np: 8
+start of for j is now: 2
+vt 898 654
+vs 650 600
+False for i 0
+False for i 1
+False for i 3
+False for i 5
+False for i 6
+False for i 7
+Printing LPVs for 650 600
+2 ver: 898 654
+4 ver: 898 654
+4 ver: 450 520
+Exiting LPVS
+False for i 0
+False for i 1
+False for i 3
+False for i 5
+False for i 6
+False for i 7
+Printing LPVs for 898 654
+2 ver: 650 600
+4 ver: 650 600
+Exiting LPVS
+start of for j is now: 3
+vt 19 624
+vs 450 520
+False for i 0
+False for i 1
+False for i 3
+False for i 5
+False for i 6
+False for i 7
+Printing LPVs for 450 520
+4 ver: 650 600
+Exiting LPVS
+False for i 0
+False for i 1
+False for i 3
+False for i 5
+False for i 6
+False for i 7
+Printing LPVs for 19 624
+Exiting LPVS

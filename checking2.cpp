@@ -602,6 +602,8 @@ void Merge()
                 // else
                 //     LUP[u] = np;
                 // LUP.push_back(np);
+                LDP.resize(np);
+                // LUP.resize(u);
                 cout << "LUP size: " << LUP.size() << " LDP size: " << LDP.size() << endl;
                 cout << "u: " << u << " np: " << np << endl;
                 LDP[j] = false;
@@ -610,11 +612,13 @@ void Merge()
                 LUP[j] = np;
                 LUP[u] = np;
 
-                cout << "LUP size: " << LUP.size() << " np: " << np << endl;
                 for (int h = 0; h < np - 1; h++)
                 {
                     if (LUP[h] == j || LUP[h] == u)
+                    {
+                        cout << "h: " << h << endl;
                         LUP[h] = np;
+                    }
                 }
             }
         }

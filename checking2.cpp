@@ -122,17 +122,17 @@ vector<Vertex *> getVerticesVTR(vector<Vertex *> L, Vertex *v1, Vertex *vo)
     // cout << "last: " << last->pos.x << " " << last->pos.y << endl;
     // cout << "should be zero: " << signed_area(v1, vo, vo) << endl;
     // cout << "slope :" << semiplane << endl;
-    for (int i = 0; i < L.size(); i++)
+    for (int i = 1; i < L.size(); i++)
     {
         if (semiplane * signed_area(v1, vo, L[i]) > 0)
         {
             VTR.push_back(L[i]);
         }
     }
-    // cout << "printing vtr: " << VTR.size() << endl;
+    cout << "printing vtr: " << VTR.size() << endl;
     for (int vt = 0; vt < VTR.size(); vt++)
     {
-        // cout << vt << " " << VTR[vt]->pos.x << " " << VTR[vt]->pos.y << endl;
+        cout << vt << " " << VTR[vt]->pos.x << " " << VTR[vt]->pos.y << endl;
     }
     return VTR;
 }
@@ -157,12 +157,13 @@ void Decompose()
         // cout << "printing incident edge of v1" << endl;
         // cout << v[1]->inc_edge->org->pos.x << " " << v[1]->pos.y << endl;
         v[2] = v[1]->inc_edge->next->org;
-        // cout << "v1 and v2 are: " << endl;
-        // cout << v[1]->pos.x << " " << v[1]->pos.y << endl;
-        // cout << v[2]->pos.x << " " << v[2]->pos.y << endl;
+        cout << "v1 and v2 are: " << endl;
+        cout << v[1]->pos.x << " " << v[1]->pos.y << endl;
+        cout << v[2]->pos.x << " " << v[2]->pos.y << endl;
         L.clear();
         L.push_back(v[1]);
         L.push_back(v[2]);
+        cout<<"size of L: "<<L.size()<<endl;
         i = 2;
         v[i + 1] = v[i]->inc_edge->next->org;
         // cout << "v[i+1]: " << v[i + 1]->pos.x << " " << v[i + 1]->pos.y << endl;
@@ -175,26 +176,26 @@ void Decompose()
             // cout << v[i]->pos.x << " " << v[i]->pos.y << endl;
             v[i + 1] = v[i]->inc_edge->next->org;
         }
-        // cout << "Notch Found" << endl;
-        // for (int num = 0; num < i; num++)
-        // {
-        //     // cout << v[i - 1]->pos.x << " " << v[i - 1]->pos.y << endl;
-        //     cout << L[num]->pos.x << " " << L[num]->pos.y << endl;
-        //     // cout << v[i + 1]->pos.x << " " << v[i + 1]->pos.y << endl;
-        // }
+        cout << "Notch Found and size of L: " <<L.size()<< endl;
+        for (int num = 0; num < i; num++)
+        {
+            // cout << v[i - 1]->pos.x << " " << v[i - 1]->pos.y << endl;
+            cout << L[num]->pos.x << " " << L[num]->pos.y << endl;
+            // cout << v[i + 1]->pos.x << " " << v[i + 1]->pos.y << endl;
+        }
 
         // cout << "size of L is: " << L.size() << endl;
         if (L.size() != concave.vertexList.size())
         {
             vector<Vertex *> LPVS = getLPVS(L);
-            // cout << "printing LPVS" << endl;
+            cout << "printing LPVS" << endl;
 
-            // for (int num = 0; num < LPVS.size(); num++)
-            // {
-            //     // cout << v[i - 1]->pos.x << " " << v[i - 1]->pos.y << endl;
-            //     cout << LPVS[num]->pos.x << " " << LPVS[num]->pos.y << endl;
-            //     // cout << v[i + 1]->pos.x << " " << v[i + 1]->pos.y << endl;
-            // }
+            for (int num = 0; num < LPVS.size(); num++)
+            {
+                // cout << v[i - 1]->pos.x << " " << v[i - 1]->pos.y << endl;
+                cout << LPVS[num]->pos.x << " " << LPVS[num]->pos.y << endl;
+                // cout << v[i + 1]->pos.x << " " << v[i + 1]->pos.y << endl;
+            }
             while (LPVS.size() > 0)
             {
                 // make rectangle
@@ -220,6 +221,7 @@ void Decompose()
                         // cout << m << " are we getting here?" << endl;
                         if (is_inside_polygon(L, vo))
                         {
+                            cout<<"Hello"<<endl;
                             vector<Vertex *> VTR = getVerticesVTR(L, v[1], vo);
                             for (int p = 0; p < VTR.size(); p++)
                             {
@@ -241,7 +243,7 @@ void Decompose()
             }
         }
         // cout << "checking L.back" << endl;
-        // cout << L.back()->pos.x << " " << L.back()->pos.y << endl;
+        //cout << L[0]->pos.x << " " << L[0]->pos.y << endl;
         if (L.back() != v[2])
         {
             cout << "we are now here in " << m << "th iteration" << endl;
@@ -250,7 +252,7 @@ void Decompose()
             for (int i = 0; i < L.size(); i++)
             {
                 _temp.push_back(L[i]->pos);
-                // cout << i << " " << _temp[i].x << " " << _temp[i].y << endl;
+                cout << i << " " << _temp[i].x << " " << _temp[i].y << endl;
             }
 
             for (int i = 1; i < L.size() - 1; i++)
@@ -362,17 +364,62 @@ vector<lpv *> make_LPV(Vertex *v)
     return LPVs;
 }
 
-bool isConvex(Vertex *vt, Vertex *vs, vector<lpv *> LPVs, int j)
+bool isConvex(Vertex *vs, Vertex *vt, vector<lpv *> LPVs)
 {
-    int u;
-    for (int k = 0; k < LPVs.size(); k++)
-    {
-        if (LPVs[k]->ver->pos == vt->pos)
-        {
-            u = LPVs[k]->k;
-            break;
+    bool ans = true;
+    Vertex *ne1p1,*ne2p1, *ne1p2, *ne2p2;
+    Vertex *v1, *v2;
+    int polyind[2];
+    int tmp = 0;
+    for(int itr =0; itr<LPVs.size(); itr++){
+        if(LPVs[itr]->ver->pos == vt->pos){
+            int polyindex = LPVs[itr]->k;
+            cout<<"Polyindex is: "<<polyindex<<endl;
+            polyind[tmp] = polyindex;
+            tmp++;
         }
+    }   
+    
+    for(int in1=0; in1<decomp[polyind[0]].vertexList.size();in1++)
+    {    
+        if (vs->pos == decomp[polyind[0]].vertexList[in1]->pos)
+            {
+            ne1p1 = decomp[polyind[0]].vertexList[in1]->inc_edge->next->org;
+            ne2p1 = decomp[polyind[0]].vertexList[in1]->inc_edge->twin->next->next->org;
+            }
     }
+    for(int in1=0; in1<decomp[polyind[1]].vertexList.size();in1++)
+    {    
+        if (vs->pos == decomp[polyind[1]].vertexList[in1]->pos)
+            {
+            ne1p2 = decomp[polyind[1]].vertexList[in1]->inc_edge->next->org;
+            ne2p2 = decomp[polyind[1]].vertexList[in1]->inc_edge->twin->next->next->org;
+            }
+    }
+    if(vt->pos == ne1p1->pos){
+        v1 = ne2p1;
+    }
+    else{
+        v1 = ne1p1;
+    }
+    if(vt->pos == ne1p2->pos){
+        v2 = ne2p2;
+    }
+    else{
+        v2 = ne1p2;
+    }
+    if(is_notch(v2, vs, v1))
+        ans = false;
+    return ans;
+    // int u;
+    // for (int k = 0; k < LPVs.size(); k++)
+    // {
+    //     if (LPVs[k]->ver->pos == vt->pos)
+    //     {
+    //         u = LPVs[k]->k;
+    //         break;
+    //     }
+    // }
     // for (int k = 0; k < decomp[j].vertexList.size(); k++)
     // {
     //     if (decomp[j].vertexList[k]->pos == vt->pos &&
@@ -386,9 +433,18 @@ bool isConvex(Vertex *vt, Vertex *vs, vector<lpv *> LPVs, int j)
     //         j3 = decomp[j].vertexList[k]->inc_edge->next->org;
     //     }
     // }
-    return true;
+    //return true;
 }
+void removeDiagonal(int polyind1, int polyind2, Vertex *vs, Vertex *vt){
 
+    for(int in1=0; in1<decomp[polyind1].vertexList.size();in1++)
+    {    
+        if (vs->pos == decomp[polyind1].vertexList[in1]->pos)
+            {
+            
+            }
+    }
+}
 void Merge()
 {
     int np = diag_cnt + 2;
@@ -406,9 +462,9 @@ void Merge()
         vector<lpv *> LPVs = make_LPV(vs);
         vector<lpv *> LPVt = make_LPV(vt);
         if ((LPVs.size() > 2 && LPVt.size() > 2) ||
-            (LPVs.size() > 2 && isConvex(vt, vs, LPVs, j)) ||
-            (LPVt.size() > 2 && isConvex(vs, vt, LPVt, j)) ||
-            (isConvex(vt, vs, LPVs, j) && isConvex(vs, vt, LPVt, j)))
+            (LPVs.size() > 2 && isConvex(vt, vs, LPVt)) ||
+            (LPVt.size() > 2 && isConvex(vs, vt,  LPVs)) ||
+            (isConvex(vs, vt, LPVs) && isConvex(vt,vs, LPVt)))
         {
             Vertex *j2 = vt;
             Vertex *i2 = vt;
@@ -451,6 +507,7 @@ void Merge()
             {
                 np--;
                 // Write NPth polygon
+
                 LDP[j] = false;
                 LDP[u] = false;
                 LDP[np] = true;
@@ -502,7 +559,7 @@ int main()
 
     // cout << isInsideConvexPolygon(l, v) << endl;
     Decompose();
-    ofstream decompFile("decomp.txt");
+    ofstream decompFile("newdecomp.txt");
     if (!decompFile.is_open())
     {
         cerr << "Error: decomp.txt not Found." << endl;
@@ -523,8 +580,14 @@ int main()
         // cout << diagList[i].v1->pos.x << " " << diagList[i].v1->pos.y << " | ";
         // cout << diagList[i].v2->pos.x << " " << diagList[i].v2->pos.y << endl;
     }
-    cout << "Vertex is: " << merge_concave.vertexList[2]->pos.x << " " << merge_concave.vertexList[2]->pos.y << endl;
-    make_LPV(merge_concave.vertexList[2]);
+    cout << "Vertex is: " << merge_concave.vertexList[4]->pos.x << " " << merge_concave.vertexList[4]->pos.y << endl;
+    vector<lpv *> LPVs = make_LPV(merge_concave.vertexList[4]);
+    if(isConvex(merge_concave.vertexList[4], merge_concave.vertexList[6], LPVs)){
+        cout<<"yes"<<endl;
+    }
+    else{
+        cout<<"no"<<endl;
+    }
     // lpv *obj = new lpv(0, merge_concave.vertexList[2]);
     // lpv *obj = new lpv();
     // cout << "End of file are we here?" << endl;

@@ -1,0 +1,16 @@
+ vertex 0 : 969, 127
+ vertex of inc edge0 : 301 -> 280
+ vertex 1 : 301, 280
+ vertex of inc edge1 : 19 -> 624
+ vertex 2 : 19, 624
+ vertex of inc edge2 : 450 -> 520
+ vertex 3 : 450, 520
+ vertex of inc edge3 : 969 -> 127
+ vertex 0 : 19, 624
+ vertex of inc edge0 : 500 -> 700
+ vertex 1 : 500, 700
+ vertex of inc edge1 : 650 -> 600
+ vertex 2 : 650, 600
+ vertex of inc edge2 : 450 -> 520
+ vertex 3 : 450, 520
+ vertex of inc edge3 : 19 -> 624

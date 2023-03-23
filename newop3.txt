@@ -1,3 +1,4 @@
+Intial np 5
 start of for j is now: 0
 vt 19 624
 vs 969 127
@@ -33,23 +34,21 @@ Merged polygon is:
  vertex of inc edge2 : 450 -> 520
  vertex 3 : 450, 520
  vertex of inc edge3 : 969 -> 127
-LUP size: 6 LDP size: 6
-u: 3 np: 7
-LUP size: 6 np: 7
+LUP size: 6 LDP size: 7
+u: 3 np: 6
 start of for j is now: 1
 vt 650 600
 vs 19 624
 False for i 0
 False for i 3
-False for i 6
 Printing LPVs for 19 624
 1 ver: 650 600
 5 ver: 650 600
 5 ver: 450 520
+6 ver: 450 520
 Exiting LPVS
 False for i 0
 False for i 3
-False for i 6
 Printing LPVs for 650 600
 1 ver: 19 624
 2 ver: 898 654
@@ -78,9 +77,8 @@ Merged polygon is:
  vertex of inc edge2 : 450 -> 520
  vertex 3 : 450, 520
  vertex of inc edge3 : 19 -> 624
-LUP size: 6 LDP size: 6
-u: 5 np: 8
-LUP size: 6 np: 8
+LUP size: 6 LDP size: 8
+u: 5 np: 7
 start of for j is now: 2
 vt 898 654
 vs 650 600
@@ -88,19 +86,16 @@ False for i 0
 False for i 1
 False for i 3
 False for i 5
-False for i 6
-False for i 7
 Printing LPVs for 650 600
 2 ver: 898 654
 4 ver: 898 654
 4 ver: 450 520
+7 ver: 450 520
 Exiting LPVS
 False for i 0
 False for i 1
 False for i 3
 False for i 5
-False for i 6
-False for i 7
 Printing LPVs for 898 654
 2 ver: 650 600
 4 ver: 650 600
@@ -112,16 +107,59 @@ False for i 0
 False for i 1
 False for i 3
 False for i 5
-False for i 6
-False for i 7
 Printing LPVs for 450 520
 4 ver: 650 600
+6 ver: 19 624
+7 ver: 19 624
+7 ver: 650 600
 Exiting LPVS
 False for i 0
 False for i 1
 False for i 3
 False for i 5
-False for i 6
-False for i 7
 Printing LPVs for 19 624
+6 ver: 450 520
+7 ver: 450 520
 Exiting LPVS
+start of for j is now: 4
+vt 450 520
+vs 650 600
+False for i 0
+False for i 1
+False for i 3
+False for i 5
+Printing LPVs for 650 600
+2 ver: 898 654
+4 ver: 898 654
+4 ver: 450 520
+7 ver: 450 520
+Exiting LPVS
+False for i 0
+False for i 1
+False for i 3
+False for i 5
+Printing LPVs for 450 520
+4 ver: 650 600
+6 ver: 19 624
+7 ver: 19 624
+7 ver: 650 600
+Exiting LPVS
+Are we reaching here?
+j2 450 520
+i2 650 600
+i1 450 520
+j3 650 600
+u: 7
+i3 450 520
+j1 650 600
+Reaching in if
+This value should be 7: 0
+Merging indices: 4 0
+Merged polygon is: 
+ vertex 0 : 650, 600
+ vertex of inc edge0 : 898 -> 654
+ vertex 1 : 898, 654
+ vertex of inc edge1 : 650 -> 600
+LUP size: 8 LDP size: 9
+u: 7 np: 8
+End of file are we here?

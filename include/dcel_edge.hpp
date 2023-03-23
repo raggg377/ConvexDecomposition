@@ -9,8 +9,8 @@ class Edge
 public:
     Edge *twin;  ///< Pointer to oppositely directed edge
     Vertex *org; ///< Pointer to origin vertex of directed
-    Edge *next;
-    Edge *prev;
+    Edge *next;  ///< Pointer to next edge in clockwise direction
+    Edge *prev;  ///< Pointer to previous edge in clockwise direction
     Edge()
     {
         twin = nullptr;

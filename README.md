@@ -1,4 +1,10 @@
 # ConvexDecomposition
+Authors:
+
+Aaditya Mahesh Rathi (2020A7PS2191H)
+Chirag Gadia (2020A7PS1721H)
+Sankalp Kulkarni (2020A7PS1097H)
+Shreyas Yogesh Dixit (2020A7PS2079H)
 
 Decomposition of concave polygon into convex polygons making use of the algorithm described in the paper: Fernández, J., Cánovas, L., & Pelegrı́n, B. (2000). Algorithms for the decomposition of a polygon into convex polygons. European Journal of Operational Research, 121(2), 330-342. 
 

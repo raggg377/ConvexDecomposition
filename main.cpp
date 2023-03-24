@@ -1,6 +1,10 @@
 /**
  * @file main.cpp
- * @author your name (you@domain.com)
+ * @author
+ * Aaditya Mahesh Rathi (2020A7PS2191H)
+ * Chirag Gadia (2020A7PS1721H)
+ * Sankalp Kulkarni (2020A7PS1097H)
+ * Shreyas Yogesh Dixit (2020A7PS2079H)
  * @brief
  * @version 0.1
  * @date 2023-03-24

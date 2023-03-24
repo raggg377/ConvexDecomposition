@@ -2,6 +2,10 @@
 #define DCEL_VEC2_HPP
 using namespace std;
 
+/**
+ * @brief Vec2 stores the coordinates of a point as a pair
+ *
+ */
 class vec2
 {
 public:

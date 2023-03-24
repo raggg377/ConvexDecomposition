@@ -1,3 +1,14 @@
+/**
+ * @file fair.cpp
+ * @author your name (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2023-03-24
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include <iostream>
 #include <fstream>
 #include <bits/stdc++.h>
@@ -11,22 +22,40 @@
 
 using namespace std;
 
-dcel concave;
-dcel merge_concave;
-vector<int> LUP;
-vector<bool> LDP;
-int poly_cnt = 0;
-int diag_cnt = 0;
-vector<dcel> decomp;
-vector<vec2> concave_polygon;
-vector<diag> diagList;
-int vertex_counter = 0;
+dcel concave;                 ///< DCEL of the concave polygon
+dcel merge_concave;           ///< DCEL of the concave used polygon
+vector<int> LUP;              ///< LUP is an ordered list of integer i.e. the polygon with index i is part of the polygon with index j.
+vector<bool> LDP;             ///< LDP is a boolean list which is true if polygon i is a definitive polygon after merging.
+int poly_cnt = 0;             ///< Number of polygons in the decomposition
+int diag_cnt = 0;             ///< Number of diagonals in the decomposition
+vector<dcel> decomp;          ///< Decomposition of the concave polygon
+vector<vec2> concave_polygon; ///< List of vertices of the concave polygon
+vector<diag> diagList;        ///< List of diagonals in the decomposition
+
+/**
+ * @brief function to check if the angle at vertex v2 is reflex(greater than 180 degrees)
+ *
+ * @param v1 vertex1
+ * @param v2 vertex2
+ * @param v3 vertex3
+ * @return true
+ * @return false
+ */
+
 bool is_notch(Vertex *v1, Vertex *v2, Vertex *v3)
 {
     double dot_product = (v3->pos.x - v1->pos.x) * (v2->pos.y - v1->pos.y) - (v3->pos.y - v1->pos.y) * (v2->pos.x - v1->pos.x);
     return dot_product < 0;
 }
 
+/**
+ * @brief checks if the vertex is inside the minimum bounding rectangle formed by the points in the list v
+ *
+ * @param v list of vertices of a polygon
+ * @param ver vertex to be checked
+ * @return true if v is inside the minimum bounding rectangle formed by p
+ * @return false if v is not inside the minimum bounding rectangle formed by p
+ */
 bool is_inside_rectangle(vector<Vertex *> v, Vertex *ver)
 {
     int max_x = INT_MIN, min_x = INT_MAX, max_y = INT_MIN, min_y = INT_MAX;
@@ -55,6 +84,12 @@ bool is_inside_rectangle(vector<Vertex *> v, Vertex *ver)
     return false;
 }
 
+/**
+ * @brief Get the LPVS object
+ *
+ * @param L list of vertices of a polygon
+ * @return vector<Vertex *>
+ */
 vector<Vertex *> getLPVS(vector<Vertex *> L)
 {
     vector<Vertex *> LPVS;
@@ -69,6 +104,14 @@ vector<Vertex *> getLPVS(vector<Vertex *> L)
     return LPVS;
 }
 
+/**
+ * @brief checks if the vertex is inside the polygon
+ *
+ * @param vertices list of vertices of a polygon
+ * @param point vertex to be checked
+ * @return true if point is inside the polygon
+ * @return false if point is not inside the polygon
+ */
 bool is_inside_polygon(vector<Vertex *> vertices, Vertex *point)
 {
     int n = vertices.size();
@@ -94,6 +137,15 @@ bool is_inside_polygon(vector<Vertex *> vertices, Vertex *point)
     // If we make it to the end without finding a sign change, the point is inside the polygon
     return true;
 }
+
+/**
+ * @brief checks if last lies in the semiplane formed by v1 and vo
+ *
+ * @param v1 vertex of one endpoint of the line v1vo
+ * @param vo vertex of the other endpoint of the line v1vo
+ * @param last vertex to be checked
+ * @return double signed area of the triangle formed by v1, vo and last
+ */
 double signed_area(Vertex *v1, Vertex *vo, Vertex *last)
 {
     double slope = (v1->pos.y - vo->pos.y) / (v1->pos.x - vo->pos.x);
@@ -101,6 +153,14 @@ double signed_area(Vertex *v1, Vertex *vo, Vertex *last)
     return (last->pos.y - (slope * last->pos.x) - c);
 }
 
+/**
+ * @brief Get the Vertices VTR object which lies in the semiplane formed by v1 and vo
+ *
+ * @param L list of vertices of a polygon
+ * @param v1 vertex1
+ * @param vo vertex2
+ * @return vector<Vertex *> list of vertices of VTR
+ */
 vector<Vertex *> getVerticesVTR(vector<Vertex *> L, Vertex *v1, Vertex *vo)
 {
     vector<Vertex *> VTR;
@@ -116,6 +176,10 @@ vector<Vertex *> getVerticesVTR(vector<Vertex *> L, Vertex *v1, Vertex *vo)
     return VTR;
 }
 
+/**
+ * @brief Decomposes the concave polygon into convex polygons
+ *
+ */
 void Decompose()
 {
 
@@ -233,6 +297,13 @@ void Decompose()
     }
 }
 
+/**
+ * @brief creates LPvj is a object of the list containing pairs (k,vr) where k is the index of a polygon containing vj as one of its vertices and vr is the next vertex to vj in that polygon k.
+        These pairs are in LPvj only if vr is not the consecutive vertex of vj in the initial polygon, i.e., if (vj ,vr) is a diagonal.
+ *
+ * @param v Vertex j whose LPvj is to be created
+ * @return vector<lpv *> LPvj
+ */
 vector<lpv *> make_LPV(Vertex *v)
 {
     vector<lpv *> LPVs;
@@ -275,6 +346,15 @@ vector<lpv *> make_LPV(Vertex *v)
     return LPVs;
 }
 
+/**
+ * @brief checks if the vertices vs and vt both are convex or not
+ *
+ * @param vs endpoint of the diagonal
+ * @param vt other endpoint of the diagonal
+ * @param LPVs LPvj of vt
+ * @return true
+ * @return false
+ */
 bool isConvex(Vertex *vs, Vertex *vt, vector<lpv *> LPVs)
 {
     bool ans = true;
@@ -328,6 +408,14 @@ bool isConvex(Vertex *vs, Vertex *vt, vector<lpv *> LPVs)
     return ans;
 }
 
+/**
+ * @brief merges the two polygons polyind1 and polyind2
+ *
+ * @param polyind1 polygon to be merged
+ * @param polyind2 other polygon to be merged
+ * @param vs endpoint of the diagonal
+ * @param vt other endpoint of the diagonal
+ */
 void mergePolygons(int polyind1, int polyind2, Vertex *vs, Vertex *vt)
 {
     if (polyind1 == polyind2)
@@ -394,6 +482,10 @@ void mergePolygons(int polyind1, int polyind2, Vertex *vs, Vertex *vt)
     poly_cnt++;
 }
 
+/**
+ * @brief implemets the merging algorithm
+ *
+ */
 void Merge()
 {
     int np = poly_cnt - 1;
@@ -419,21 +511,21 @@ void Merge()
             Vertex *i3;
             Vertex *j1;
             Vertex *i1;
-            for (int k = 0; k < decomp[j].vertexList.size(); k++)
+            for (int k = 0; k < decomp[LUP[j]].vertexList.size(); k++)
             {
-                if (decomp[j].vertexList[k]->pos == vt->pos)
+                if (decomp[LUP[j]].vertexList[k]->pos == vt->pos)
                 {
-                    j3 = decomp[j].vertexList[k]->inc_edge->next->org;
+                    j3 = decomp[LUP[j]].vertexList[k]->inc_edge->next->org;
                 }
-                if (decomp[j].vertexList[k]->pos == vs->pos)
+                if (decomp[LUP[j]].vertexList[k]->pos == vs->pos)
                 {
-                    i1 = decomp[j].vertexList[k]->inc_edge->twin->next->next->org;
+                    i1 = decomp[LUP[j]].vertexList[k]->inc_edge->twin->next->next->org;
                 }
             }
             int u;
             for (int k = 0; k < LPVt.size(); k++)
             {
-                if (LPVt[k]->ver->pos == vs->pos && LPVt[k]->k != j && LDP[LPVt[k]->k] != false)
+                if (LPVt[k]->ver->pos == vs->pos && LPVt[k]->k != LUP[j] && LDP[LPVt[k]->k] != false)
                 {
                     u = LPVt[k]->k;
                     break;
@@ -488,6 +580,7 @@ void Merge()
         }
     }
 }
+
 int main()
 {
 
@@ -497,8 +590,8 @@ int main()
         cerr << "Error: input.txt not Found." << endl;
         exit(0);
     }
-    char line[100000];
-    inputFile.getline(line, 100000);
+    char line[1000000];
+    inputFile.getline(line, 1000000);
     char ch;
     float x, y;
     stringstream ss(line);

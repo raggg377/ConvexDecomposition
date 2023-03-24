@@ -583,7 +583,7 @@ void Merge()
 int main()
 {
 
-    ifstream inputFile("./testcases/testcase7.txt");
+    ifstream inputFile("./testcases/testcase8.txt");
     if (!inputFile.is_open())
     {
         cerr << "Error: input.txt not Found." << endl;
@@ -603,7 +603,7 @@ int main()
     concave.make_dcel(concave_polygon);
     merge_concave.make_dcel(concave_polygon);
     Decompose();
-    ofstream decompFile("./decompose/decompose7.txt");
+    ofstream decompFile("./decompose/decompose8.txt");
     if (!decompFile.is_open())
     {
         cerr << "Error: decomp.txt not Found." << endl;
@@ -618,7 +618,7 @@ int main()
         decompFile << endl;
     }
     Merge();
-    ofstream mergeFile("./merge/merge7.txt");
+    ofstream mergeFile("./merge/merge8.txt");
     if (!mergeFile.is_open())
     {
         cerr << "Error: merge.txt not Found." << endl;

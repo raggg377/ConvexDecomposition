@@ -255,7 +255,7 @@ void Decompose()
             for (int i = 0; i < L.size(); i++)
             {
                 _temp.push_back(L[i]->pos);
-                cout << i << " " << _temp[i].x << " " << _temp[i].y << endl;
+                // cout << i << " " << _temp[i].x << " " << _temp[i].y << endl;
             }
 
             for (int i = 1; i < L.size() - 1; i++)
@@ -323,7 +323,7 @@ vector<lpv *> make_LPV(Vertex *v)
     {
         if (LDP[i] == false)
         {
-            cout << "False for i " << i << endl;
+            // cout << "False for i " << i << endl;
             continue;
         }
         // cout << "i is: " << i << endl;
@@ -364,13 +364,13 @@ vector<lpv *> make_LPV(Vertex *v)
         }
     }
 
-    cout << "Printing LPVs for ";
-    cout << v->pos.x << " " << v->pos.y << endl;
+    // cout << "Printing LPVs for ";
+    // cout << v->pos.x << " " << v->pos.y << endl;
     for (int y = 0; y < LPVs.size(); y++)
     {
-        cout << LPVs[y]->k << " ver: " << LPVs[y]->ver->pos.x << " " << LPVs[y]->ver->pos.y << endl;
+        // cout << LPVs[y]->k << " ver: " << LPVs[y]->ver->pos.x << " " << LPVs[y]->ver->pos.y << endl;
     }
-    cout << "Exiting LPVS" << endl;
+    // cout << "Exiting LPVS" << endl;
     return LPVs;
 }
 
@@ -430,9 +430,10 @@ bool isConvex(Vertex *vs, Vertex *vt, vector<lpv *> LPVs)
 
 void mergePolygons(int polyind1, int polyind2, Vertex *vs, Vertex *vt)
 {
+    cout << "just inside merge poly" << endl;
     if (polyind1 == polyind2)
     {
-        cout << "Error merging same polygon" << endl;
+        // cout << "Error merging same polygon" << endl;
     }
     cout << "Merging indices: " << polyind1 << " " << polyind2 << endl;
     vector<vec2> _temp;
@@ -499,17 +500,19 @@ void mergePolygons(int polyind1, int polyind2, Vertex *vs, Vertex *vt)
             break;
         }
     }
+    cout << "before decomp resize" << endl;
     decomp.resize(poly_cnt + 1);
     decomp[poly_cnt].make_dcel(_temp);
-    cout << "Merged polygon is: " << endl;
-    decomp[poly_cnt].print_dcel();
+    // cout << "Merged polygon is: " << endl;
+    // decomp[poly_cnt].print_dcel();
     poly_cnt++;
 }
 
 void Merge()
 {
+    cout << "Initial poly: " << poly_cnt << endl;
     int np = poly_cnt - 1;
-    cout << "Intial np " << np << endl;
+    cout << "Intial diag " << diag_cnt << endl;
     for (int i = 0; i < poly_cnt; i++)
     {
         LDP.push_back(true);
@@ -518,27 +521,28 @@ void Merge()
     for (int j = 0; j < diag_cnt; j++)
     {
         cout << "start of for j is now: " << j << endl;
-        // for (int k = 0; k < di; k++)
-        // {
+        //  for (int k = 0; k < di; k++)
+        //  {
 
         // }
         Vertex *vs = diagList[j].v2;
         Vertex *vt = diagList[j].v1;
-        cout << "vt " << vt->pos.x << " " << vt->pos.y << endl;
-        cout << "vs " << vs->pos.x << " " << vs->pos.y << endl;
-
+        // cout << "vt " << vt->pos.x << " " << vt->pos.y << endl;
+        // cout << "vs " << vs->pos.x << " " << vs->pos.y << endl;
+        // cout << "endpoint 1" << endl;
         vector<lpv *> LPVs = make_LPV(vs);
         vector<lpv *> LPVt = make_LPV(vt);
+        // cout << "endpoint 2" << endl;
         if ((LPVs.size() > 2 && LPVt.size() > 2) ||
             (LPVs.size() > 2 && isConvex(vt, vs, LPVt)) ||
             (LPVt.size() > 2 && isConvex(vs, vt, LPVs)) ||
             (isConvex(vs, vt, LPVs) && isConvex(vt, vs, LPVt)))
         {
-            cout << "Are we reaching here?" << endl;
+            // cout << "Are we reaching here?" << endl;
             Vertex *j2 = vt;
-            cout << "j2 " << j2->pos.x << " " << j2->pos.y << endl;
+            // cout << "j2 " << j2->pos.x << " " << j2->pos.y << endl;
             Vertex *i2 = vs;
-            cout << "i2 " << i2->pos.x << " " << i2->pos.y << endl;
+            // cout << "i2 " << i2->pos.x << " " << i2->pos.y << endl;
             Vertex *j3;
             Vertex *i3;
             Vertex *j1;
@@ -548,12 +552,12 @@ void Merge()
                 if (decomp[j].vertexList[k]->pos == vt->pos)
                 {
                     j3 = decomp[j].vertexList[k]->inc_edge->next->org;
-                    cout << "j3 " << j3->pos.x << " " << j3->pos.y << endl;
+                    // cout << "j3 " << j3->pos.x << " " << j3->pos.y << endl;
                 }
                 if (decomp[j].vertexList[k]->pos == vs->pos)
                 {
                     i1 = decomp[j].vertexList[k]->inc_edge->twin->next->next->org;
-                    cout << "i1 " << i1->pos.x << " " << i1->pos.y << endl;
+                    // cout << "i1 " << i1->pos.x << " " << i1->pos.y << endl;
                 }
             }
             int u;
@@ -571,29 +575,38 @@ void Merge()
                 if (decomp[u].vertexList[k]->pos == vt->pos)
                 {
                     j1 = decomp[u].vertexList[k]->inc_edge->twin->next->next->org;
-                    cout << "j1 " << j1->pos.x << " " << j1->pos.y << endl;
+                    // cout << "j1 " << j1->pos.x << " " << j1->pos.y << endl;
                 }
                 if (decomp[u].vertexList[k]->pos == vs->pos)
                 {
 
                     i3 = decomp[u].vertexList[k]->inc_edge->next->org;
-                    cout << "i3 " << i3->pos.x << " " << i3->pos.y << endl;
+                    // cout << "i3 " << i3->pos.x << " " << i3->pos.y << endl;
                 }
             }
+            // cout << "endpoint 3" << endl;
             if (!is_notch(i1, i2, i3) && !is_notch(j1, j2, j3))
             {
-                cout << "Reaching in if here np is: " << np << endl;
+                cout << "just inside the victim if" << endl;
+                // cout << "Reaching in if here np is: " << np << endl;
                 np++;
+                cout << "endpoint 1" << endl;
                 // Write NPth polygon
-                cout << "This value should be 7: " << LUP[u] << endl;
+                for (int test = 0; test < LUP.size(); test++)
+                {
+                    cout << LUP[test] << " ";
+                }
+                cout << "This value: " << LUP[j] << " " << LUP[u] << endl;
                 mergePolygons(LUP[j], LUP[u], vs, vt);
+                cout << "endpoint 4" << endl;
                 LDP.resize(np + 1, true);
-
+                cout << "endpoint 5" << endl;
                 LDP[j] = false;
                 LDP[u] = false;
                 LDP[np] = true;
                 LUP[j] = np;
                 // LUP[u] = np;
+                cout << "endpoint 6" << endl;
                 if (u >= LUP.size())
                 {
                     for (int i = LUP.size(); i < u + 1; i++)
@@ -602,7 +615,7 @@ void Merge()
                     }
                 }
                 LUP[u] = np;
-
+                cout << "endpoint 7" << endl;
                 for (int h = 0; h < np - 1; h++)
                 {
                     if (LUP[h] == j || LUP[h] == u)
@@ -617,9 +630,10 @@ void Merge()
                         LUP[h] = np;
                     }
                 }
-                cout << "LUP size: " << LUP.size() << " LDP size: " << LDP.size() << endl;
-                cout << "u: " << u << " np: " << np << endl;
+                // cout << "LUP size: " << LUP.size() << " LDP size: " << LDP.size() << endl;
+                // cout << "u: " << u << " np: " << np << endl;
             }
+            cout << "endpoint 8 outside if" << endl;
         }
     }
 }
@@ -633,8 +647,8 @@ int main()
         exit(0);
     }
     // const int SIZE = ;
-    char line[100000];
-    inputFile.getline(line, 100000);
+    char line[1000000];
+    inputFile.getline(line, 1000000);
     char ch;
     float x, y;
     stringstream ss(line);
@@ -646,7 +660,7 @@ int main()
         concave_polygon.push_back(point);
         ss >> ch; // Ignore the comma separator
     }
-    // cout << "intial input: " << concave_polygon.size() << endl;
+    cout << "intial input: " << concave_polygon.size() << endl;
     concave.make_dcel(concave_polygon);
     merge_concave.make_dcel(concave_polygon);
     // cout << "Initial vertices: " << endl;
@@ -681,7 +695,9 @@ int main()
     //     cout << diagList[i].v1->pos.x << " " << diagList[i].v1->pos.y << " | ";
     //     cout << diagList[i].v2->pos.x << " " << diagList[i].v2->pos.y << endl;
     // }
+    cout << "now starting merging" << endl;
     Merge();
+    cout << "finished merge call" << endl;
     ofstream mergeFile("merged.txt");
     if (!mergeFile.is_open())
     {

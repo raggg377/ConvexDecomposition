@@ -1,0 +1,15 @@
+digraph "lpv"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="lpv",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="LPvj is a object of the list containing pairs (k,vr) where k is the index of a polygon containing vj ..."];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" ver" ,fontname="Helvetica"];
+  Node2 [label="Vertex",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classVertex.html",tooltip="an object of theis class will be a vertex of the polygon containing coordinates and the incident edge"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" pos" ,fontname="Helvetica"];
+  Node3 [label="vec2",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classvec2.html",tooltip="Vec2 stores the coordinates of a point as a pair."];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" inc_edge" ,fontname="Helvetica"];
+  Node4 [label="Edge",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classEdge.html",tooltip="Implements the Edge type with its origin vertex ,twin edge ,next edge and previous edge."];
+  Node2 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" org" ,fontname="Helvetica"];
+  Node4 -> Node4 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" prev\nnext\ntwin" ,fontname="Helvetica"];
+}

@@ -5,11 +5,15 @@
 
 using namespace std;
 
+/**
+ * @brief class to store the vertices of diagonals
+ *
+ */
 class diag
 {
 public:
-    Vertex *v1;
-    Vertex *v2;
+    Vertex *v1; ///< First Vertex of diagonal
+    Vertex *v2; ///< Second Vertex of diagonal
 };
 
 #endif

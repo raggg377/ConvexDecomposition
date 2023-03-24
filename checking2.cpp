@@ -430,12 +430,12 @@ bool isConvex(Vertex *vs, Vertex *vt, vector<lpv *> LPVs)
 
 void mergePolygons(int polyind1, int polyind2, Vertex *vs, Vertex *vt)
 {
-    cout << "just inside merge poly" << endl;
+    // cout << "just inside merge poly" << endl;
     if (polyind1 == polyind2)
     {
         // cout << "Error merging same polygon" << endl;
     }
-    cout << "Merging indices: " << polyind1 << " " << polyind2 << endl;
+    // cout << "Merging indices: " << polyind1 << " " << polyind2 << endl;
     vector<vec2> _temp;
     int flagck = 0;
 
@@ -500,7 +500,7 @@ void mergePolygons(int polyind1, int polyind2, Vertex *vs, Vertex *vt)
             break;
         }
     }
-    cout << "before decomp resize" << endl;
+    // cout << "before decomp resize" << endl;
     decomp.resize(poly_cnt + 1);
     decomp[poly_cnt].make_dcel(_temp);
     // cout << "Merged polygon is: " << endl;
@@ -510,9 +510,9 @@ void mergePolygons(int polyind1, int polyind2, Vertex *vs, Vertex *vt)
 
 void Merge()
 {
-    cout << "Initial poly: " << poly_cnt << endl;
+    // cout << "Initial poly: " << poly_cnt << endl;
     int np = poly_cnt - 1;
-    cout << "Intial diag " << diag_cnt << endl;
+    // cout << "Intial diag " << diag_cnt << endl;
     for (int i = 0; i < poly_cnt; i++)
     {
         LDP.push_back(true);
@@ -520,16 +520,16 @@ void Merge()
     }
     for (int j = 0; j < diag_cnt; j++)
     {
-        cout << "start of for j is now: " << j << endl;
-        //  for (int k = 0; k < di; k++)
-        //  {
+        // cout << "start of for j is now: " << j << endl;
+        //    for (int k = 0; k < di; k++)
+        //    {
 
         // }
         Vertex *vs = diagList[j].v2;
         Vertex *vt = diagList[j].v1;
         // cout << "vt " << vt->pos.x << " " << vt->pos.y << endl;
         // cout << "vs " << vs->pos.x << " " << vs->pos.y << endl;
-        // cout << "endpoint 1" << endl;
+        //   cout << "endpoint 1" << endl;
         vector<lpv *> LPVs = make_LPV(vs);
         vector<lpv *> LPVt = make_LPV(vt);
         // cout << "endpoint 2" << endl;
@@ -538,7 +538,13 @@ void Merge()
             (LPVt.size() > 2 && isConvex(vs, vt, LPVs)) ||
             (isConvex(vs, vt, LPVs) && isConvex(vt, vs, LPVt)))
         {
-            // cout << "Are we reaching here?" << endl;
+            // cout << "LUP print" << endl;
+            for (int test = 0; test < LUP.size(); test++)
+            {
+                // cout << LUP[test] << " ";
+            }
+            // cout << endl;
+            //   cout << "Are we reaching here?" << endl;
             Vertex *j2 = vt;
             // cout << "j2 " << j2->pos.x << " " << j2->pos.y << endl;
             Vertex *i2 = vs;
@@ -547,29 +553,31 @@ void Merge()
             Vertex *i3;
             Vertex *j1;
             Vertex *i1;
-            for (int k = 0; k < decomp[j].vertexList.size(); k++)
+            for (int k = 0; k < decomp[LUP[j]].vertexList.size(); k++)
             {
-                if (decomp[j].vertexList[k]->pos == vt->pos)
+                if (decomp[LUP[j]].vertexList[k]->pos == vt->pos)
                 {
-                    j3 = decomp[j].vertexList[k]->inc_edge->next->org;
+                    j3 = decomp[LUP[j]].vertexList[k]->inc_edge->next->org;
+
                     // cout << "j3 " << j3->pos.x << " " << j3->pos.y << endl;
                 }
-                if (decomp[j].vertexList[k]->pos == vs->pos)
+                if (decomp[LUP[j]].vertexList[k]->pos == vs->pos)
                 {
-                    i1 = decomp[j].vertexList[k]->inc_edge->twin->next->next->org;
+                    i1 = decomp[LUP[j]].vertexList[k]->inc_edge->twin->next->next->org;
                     // cout << "i1 " << i1->pos.x << " " << i1->pos.y << endl;
                 }
             }
             int u;
             for (int k = 0; k < LPVt.size(); k++)
             {
-                if (LPVt[k]->ver->pos == vs->pos && LPVt[k]->k != j && LDP[LPVt[k]->k] != false)
+                if (LPVt[k]->ver->pos == vs->pos && LPVt[k]->k != LUP[j] && LDP[LPVt[k]->k] != false)
                 {
                     u = LPVt[k]->k;
                     break;
                 }
             }
-            cout << "u: " << u << endl;
+            // cout << "u: " << u << endl;
+            // cout << "decomp size: " << decomp.size() << endl;
             for (int k = 0; k < decomp[u].vertexList.size(); k++)
             {
                 if (decomp[u].vertexList[k]->pos == vt->pos)
@@ -587,26 +595,27 @@ void Merge()
             // cout << "endpoint 3" << endl;
             if (!is_notch(i1, i2, i3) && !is_notch(j1, j2, j3))
             {
-                cout << "just inside the victim if" << endl;
-                // cout << "Reaching in if here np is: " << np << endl;
+                // cout << "just inside the victim if" << endl;
+                //   cout << "Reaching in if here np is: " << np << endl;
                 np++;
-                cout << "endpoint 1" << endl;
-                // Write NPth polygon
+                // cout << "now np is: " << np << endl;
+                /// cout << "endpoint 1" << endl;
+                //  Write NPth polygon
                 for (int test = 0; test < LUP.size(); test++)
                 {
-                    cout << LUP[test] << " ";
+                    // cout << LUP[test] << " ";
                 }
-                cout << "This value: " << LUP[j] << " " << LUP[u] << endl;
-                mergePolygons(LUP[j], LUP[u], vs, vt);
-                cout << "endpoint 4" << endl;
+                // cout << "This value: " << LUP[j] << " " << LUP[u] << endl;
+                mergePolygons(LUP[j], u, vs, vt);
+                // cout << "endpoint 4" << endl;
                 LDP.resize(np + 1, true);
-                cout << "endpoint 5" << endl;
+                // cout << "endpoint 5" << endl;
                 LDP[j] = false;
                 LDP[u] = false;
                 LDP[np] = true;
                 LUP[j] = np;
                 // LUP[u] = np;
-                cout << "endpoint 6" << endl;
+                // cout << "endpoint 6" << endl;
                 if (u >= LUP.size())
                 {
                     for (int i = LUP.size(); i < u + 1; i++)
@@ -615,7 +624,7 @@ void Merge()
                     }
                 }
                 LUP[u] = np;
-                cout << "endpoint 7" << endl;
+                // cout << "endpoint 7" << endl;
                 for (int h = 0; h < np - 1; h++)
                 {
                     if (LUP[h] == j || LUP[h] == u)
@@ -628,12 +637,13 @@ void Merge()
                             }
                         }
                         LUP[h] = np;
+                        // cout << "h: " << h << endl;
                     }
                 }
                 // cout << "LUP size: " << LUP.size() << " LDP size: " << LDP.size() << endl;
                 // cout << "u: " << u << " np: " << np << endl;
             }
-            cout << "endpoint 8 outside if" << endl;
+            // cout << "endpoint 8 outside if" << endl;
         }
     }
 }

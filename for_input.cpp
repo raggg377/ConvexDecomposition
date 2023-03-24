@@ -3,11 +3,14 @@ using namespace std;
 
 int main()
 {
-    ifstream inputFile("for_input.txt");
-
-    if (inputFile.is_open())
+    ifstream file("for_input.txt");
+    string line;
+    string str = getline(file, line);
+    cout << str << endl;
+    cout <
+        if (file.is_open())
     {
-        string line;
+        // string line;
         while (getline(file, line))
         {
             // note that the newline character is not included

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['removevertex_36',['removeVertex',['../classdcel.html#a85cf345d5ad33c4298210d7fa444b106',1,'dcel']]]
+  ['signed_5farea_37',['signed_area',['../main_8cpp.html#af545abfed170e729ffe93cfc53546a91',1,'main.cpp']]]
 ];

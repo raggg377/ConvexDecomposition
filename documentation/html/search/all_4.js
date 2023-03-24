@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['getlpvs_11',['getLPVS',['../fair_8cpp.html#a6658d4cf37d49b126a98ef6f0d8bdd13',1,'fair.cpp']]],
-  ['getnextvertex_12',['getNextVertex',['../classVertex.html#a97c749983fe0816960a56b1ccc911954',1,'Vertex']]],
-  ['getpreviousvertex_13',['getPreviousVertex',['../classVertex.html#a9f2aff6a3aa1f986aab17b86d8c573e7',1,'Vertex']]],
-  ['getverticesvtr_14',['getVerticesVTR',['../fair_8cpp.html#a53359fd499554dfd6b3ef256ee3dd6ba',1,'fair.cpp']]]
+  ['inc_5fedge_14',['inc_edge',['../classVertex.html#a15d4c7192cb9b69b74d7d5e56c231fe4',1,'Vertex']]],
+  ['is_5finside_5fpolygon_15',['is_inside_polygon',['../main_8cpp.html#aeefca2eeb0817532c2fb481f6d077003',1,'main.cpp']]],
+  ['is_5finside_5frectangle_16',['is_inside_rectangle',['../main_8cpp.html#acded8ddce58b84a8cb9c056cefe0038b',1,'main.cpp']]],
+  ['is_5fnotch_17',['is_notch',['../main_8cpp.html#a236de88c88b2f9cd32ff746b75010030',1,'main.cpp']]],
+  ['isconvex_18',['isConvex',['../main_8cpp.html#a04e056089087b703cc69e6f5f446c586',1,'main.cpp']]]
 ];

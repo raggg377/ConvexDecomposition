@@ -75,6 +75,7 @@ $(function() {
 <code>#include &quot;./src/dcel_vec2.cpp&quot;</code><br />
 <code>#include &quot;./include/dcel.hpp&quot;</code><br />
 <code>#include &quot;./src/dcel.cpp&quot;</code><br />
+<code>#include &quot;./src/dcel_vertex.cpp&quot;</code><br />
 <code>#include &quot;./include/diag.hpp&quot;</code><br />
 <code>#include &quot;./include/lpv.hpp&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -92,7 +93,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:acded8ddce58b84a8cb9c056cefe0038b"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the vertex is inside the minimum bounding rectangle formed by the points in the list v  <a href="fair_8cpp.html#acded8ddce58b84a8cb9c056cefe0038b">More...</a><br /></td></tr>
 <tr class="separator:acded8ddce58b84a8cb9c056cefe0038b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6658d4cf37d49b126a98ef6f0d8bdd13"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="classVertex.html">Vertex</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fair_8cpp.html#a6658d4cf37d49b126a98ef6f0d8bdd13">getLPVS</a> (vector&lt; <a class="el" href="classVertex.html">Vertex</a> * &gt; L)</td></tr>
-<tr class="memdesc:a6658d4cf37d49b126a98ef6f0d8bdd13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the LPVS object.  <a href="fair_8cpp.html#a6658d4cf37d49b126a98ef6f0d8bdd13">More...</a><br /></td></tr>
+<tr class="memdesc:a6658d4cf37d49b126a98ef6f0d8bdd13"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns vertices which belong to original polygon but doesnt belong to Lm and are notches  <a href="fair_8cpp.html#a6658d4cf37d49b126a98ef6f0d8bdd13">More...</a><br /></td></tr>
 <tr class="separator:a6658d4cf37d49b126a98ef6f0d8bdd13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeefca2eeb0817532c2fb481f6d077003"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fair_8cpp.html#aeefca2eeb0817532c2fb481f6d077003">is_inside_polygon</a> (vector&lt; <a class="el" href="classVertex.html">Vertex</a> * &gt; vertices, <a class="el" href="classVertex.html">Vertex</a> *point)</td></tr>
 <tr class="memdesc:aeefca2eeb0817532c2fb481f6d077003"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the vertex is inside the polygon  <a href="fair_8cpp.html#aeefca2eeb0817532c2fb481f6d077003">More...</a><br /></td></tr>
@@ -202,14 +203,14 @@ vector&lt; <a class="el" href="classdiag.html">diag</a> &gt;&#160;</td><td class
       </table>
 </div><div class="memdoc">
 
-<p>Get the LPVS object. </p>
+<p>returns vertices which belong to original polygon but doesnt belong to Lm and are notches </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">L</td><td>list of vertices of a polygon </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>vector&lt;Vertex *&gt; </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>vector&lt;Vertex *&gt; vertices which belong to P but doesnt belong to Lm and are notches </dd></dl>
 
 </div>
 </div>

@@ -85,6 +85,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a212a3b369e92c124aa9625d6ef33b1f4"><td class="memItemLeft" align="right" valign="top"><a id="a212a3b369e92c124aa9625d6ef33b1f4"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Vertex</b> (<a class="el" href="classvec2.html">vec2</a> <a class="el" href="classVertex.html#abb5a5cf5005ab937369bba05fb2f29a2">pos</a>)</td></tr>
 <tr class="separator:a212a3b369e92c124aa9625d6ef33b1f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f2aff6a3aa1f986aab17b86d8c573e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVertex.html">Vertex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVertex.html#a9f2aff6a3aa1f986aab17b86d8c573e7">getPreviousVertex</a> ()</td></tr>
+<tr class="memdesc:a9f2aff6a3aa1f986aab17b86d8c573e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Previous <a class="el" href="classVertex.html" title="an object of theis class will be a vertex of the polygon containing coordinates and the incident edge">Vertex</a> of this vertex in the dcel.  <a href="classVertex.html#a9f2aff6a3aa1f986aab17b86d8c573e7">More...</a><br /></td></tr>
+<tr class="separator:a9f2aff6a3aa1f986aab17b86d8c573e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97c749983fe0816960a56b1ccc911954"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVertex.html">Vertex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVertex.html#a97c749983fe0816960a56b1ccc911954">getNextVertex</a> ()</td></tr>
+<tr class="memdesc:a97c749983fe0816960a56b1ccc911954"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Next <a class="el" href="classVertex.html" title="an object of theis class will be a vertex of the polygon containing coordinates and the incident edge">Vertex</a> of this vertex in the dcel.  <a href="classVertex.html#a97c749983fe0816960a56b1ccc911954">More...</a><br /></td></tr>
+<tr class="separator:a97c749983fe0816960a56b1ccc911954"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -97,7 +103,48 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>an object of theis class will be a vertex of the polygon containing coordinates and the incident edge </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a97c749983fe0816960a56b1ccc911954"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97c749983fe0816960a56b1ccc911954">&#9670;&nbsp;</a></span>getNextVertex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classVertex.html">Vertex</a> * Vertex::getNextVertex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Next <a class="el" href="classVertex.html" title="an object of theis class will be a vertex of the polygon containing coordinates and the incident edge">Vertex</a> of this vertex in the dcel. </p>
+<dl class="section return"><dt>Returns</dt><dd>Vertex* of next vertex </dd></dl>
+
+</div>
+</div>
+<a id="a9f2aff6a3aa1f986aab17b86d8c573e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f2aff6a3aa1f986aab17b86d8c573e7">&#9670;&nbsp;</a></span>getPreviousVertex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classVertex.html">Vertex</a> * Vertex::getPreviousVertex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Previous <a class="el" href="classVertex.html" title="an object of theis class will be a vertex of the polygon containing coordinates and the incident edge">Vertex</a> of this vertex in the dcel. </p>
+<dl class="section return"><dt>Returns</dt><dd>Vertex* of previous vertex </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a id="a15d4c7192cb9b69b74d7d5e56c231fe4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a15d4c7192cb9b69b74d7d5e56c231fe4">&#9670;&nbsp;</a></span>inc_edge</h2>
 
@@ -113,8 +160,9 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="dcel__vertex_8hpp_source.html">dcel_vertex.hpp</a></li>
+<li>src/dcel_vertex.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -23,6 +23,18 @@ public:
         this->pos = pos;
         inc_edge = nullptr;
     }
+    /**
+     * @brief Get the Previous Vertex of this vertex in the dcel
+     *
+     * @return Vertex* of previous vertex
+     */
+    Vertex *getPreviousVertex();
+    /**
+     * @brief Get the Next Vertex of this vertex in the dcel
+     *
+     * @return Vertex* of next vertex
+     */
+    Vertex *getNextVertex();
 };
 
 #endif

@@ -1,3 +1,4 @@
+
 /**
  * @file fair.cpp
  * @author your name (you@domain.com)
@@ -17,7 +18,6 @@
 #include "./src/dcel_vec2.cpp"
 #include "./include/dcel.hpp"
 #include "./src/dcel.cpp"
-#include "./src/dcel_vertex.cpp"
 #include "./include/diag.hpp"
 #include "./include/lpv.hpp"
 
@@ -86,10 +86,10 @@ bool is_inside_rectangle(vector<Vertex *> v, Vertex *ver)
 }
 
 /**
- * @brief returns vertices which belong to original polygon but doesnt belong to Lm and are notches
+ * @brief Get the LPVS object
  *
  * @param L list of vertices of a polygon
- * @return vector<Vertex *> vertices which belong to P but doesnt belong to Lm and are notches
+ * @return vector<Vertex *>
  */
 vector<Vertex *> getLPVS(vector<Vertex *> L)
 {
@@ -319,11 +319,11 @@ vector<lpv *> make_LPV(Vertex *v)
         {
             if (decomp[i].vertexList[j]->pos == v->pos)
             {
-                Vertex *ne1 = decomp[i].vertexList[j]->getNextVertex();
-                Vertex *ne2 = decomp[i].vertexList[j]->getPreviousVertex();
+                Vertex *ne1 = decomp[i].vertexList[j]->inc_edge->next->org;
+                Vertex *ne2 = decomp[i].vertexList[j]->inc_edge->twin->next->next->org;
 
-                Vertex *one1 = v->getNextVertex();
-                Vertex *one2 = v->getPreviousVertex();
+                Vertex *one1 = v->inc_edge->next->org;
+                Vertex *one2 = v->inc_edge->twin->next->next->org;
 
                 if (!(ne1->pos == one1->pos) && !(ne1->pos == one2->pos))
                 {
@@ -376,16 +376,16 @@ bool isConvex(Vertex *vs, Vertex *vt, vector<lpv *> LPVs)
     {
         if (vs->pos == decomp[polyind[0]].vertexList[in1]->pos)
         {
-            ne1p1 = decomp[polyind[0]].vertexList[in1]->getNextVertex();
-            ne2p1 = decomp[polyind[0]].vertexList[in1]->getPreviousVertex();
+            ne1p1 = decomp[polyind[0]].vertexList[in1]->inc_edge->next->org;
+            ne2p1 = decomp[polyind[0]].vertexList[in1]->inc_edge->twin->next->next->org;
         }
     }
     for (int in1 = 0; in1 < decomp[polyind[1]].vertexList.size(); in1++)
     {
         if (vs->pos == decomp[polyind[1]].vertexList[in1]->pos)
         {
-            ne1p2 = decomp[polyind[1]].vertexList[in1]->getNextVertex();
-            ne2p2 = decomp[polyind[1]].vertexList[in1]->getPreviousVertex();
+            ne1p2 = decomp[polyind[1]].vertexList[in1]->inc_edge->next->org;
+            ne2p2 = decomp[polyind[1]].vertexList[in1]->inc_edge->twin->next->next->org;
         }
     }
     if (vt->pos == ne1p1->pos)
@@ -584,7 +584,7 @@ void Merge()
 int main()
 {
 
-    ifstream inputFile("./testcases/testcase1.txt");
+    ifstream inputFile("./testcases/testcase7.txt");
     if (!inputFile.is_open())
     {
         cerr << "Error: input.txt not Found." << endl;
@@ -604,7 +604,7 @@ int main()
     concave.make_dcel(concave_polygon);
     merge_concave.make_dcel(concave_polygon);
     Decompose();
-    ofstream decompFile("./decompose/decompose1.txt");
+    ofstream decompFile("./decompose/decompose7.txt");
     if (!decompFile.is_open())
     {
         cerr << "Error: decomp.txt not Found." << endl;
@@ -619,7 +619,7 @@ int main()
         decompFile << endl;
     }
     Merge();
-    ofstream mergeFile("./merge/merge1.txt");
+    ofstream mergeFile("./merge/merge7.txt");
     if (!mergeFile.is_open())
     {
         cerr << "Error: merge.txt not Found." << endl;

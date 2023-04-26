@@ -6,10 +6,13 @@
 using namespace std;
 class Edge;
 
+/**
+ * @brief an object of theis class will be a vertex of the polygon containing coordinates and the incident edge
+ *
+ */
 class Vertex
 {
 public:
-    // int id;   ///< Identifier for the vertex
     vec2 pos; ///< Geometric co-ordinates of the vetex
     /**
      *  Pointer to any directed edge that has this vertex as origin. inc_edge.org = this vertex
@@ -17,10 +20,21 @@ public:
     Edge *inc_edge;
     Vertex(vec2 pos)
     {
-        // this->id = id;
         this->pos = pos;
         inc_edge = nullptr;
     }
+    /**
+     * @brief Get the Previous Vertex of this vertex in the dcel
+     *
+     * @return Vertex* of previous vertex
+     */
+    Vertex *getPreviousVertex();
+    /**
+     * @brief Get the Next Vertex of this vertex in the dcel
+     *
+     * @return Vertex* of next vertex
+     */
+    Vertex *getNextVertex();
 };
 
 #endif
